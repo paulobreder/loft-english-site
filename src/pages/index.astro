@@ -1,0 +1,412 @@
+---
+import { url } from '../lib/url';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import VidaNaLoft from '../components/home/VidaNaLoft.astro';
+import AudienceCard from '../components/AudienceCard.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Faq from '../components/Faq.astro';
+import ContactBand from '../components/ContactBand.astro';
+import Icon from '../components/Icon.astro';
+import { courses } from '../data/courses';
+import { faq } from '../data/faq';
+import { site, contact, primaryContact } from '../config/site';
+
+const cta = primaryContact();
+
+const steps = [
+  {
+    title: 'Conheça os cursos',
+    text: 'Veja os públicos Kids, Teens e Adults e descubra qual combina com você ou com sua família.',
+    link: { href: url('/cursos/'), label: 'Ver cursos', external: false },
+  },
+  {
+    title: 'Fale com a equipe',
+    text: `Envie sua mensagem pelo ${cta.channel === 'whatsapp' ? 'WhatsApp' : 'Instagram oficial'} e conte o que você procura.`,
+    link: { href: cta.href, label: cta.label, external: true },
+  },
+  {
+    title: 'Tire suas dúvidas',
+    text: 'Pergunte sobre turmas, horários, modalidades e condições diretamente com a escola.',
+    link: { href: url('/contato/'), label: 'Ver contato', external: false },
+  },
+];
+---
+
+<BaseLayout
+  title="Loft English: escola de inglês em São Gabriel da Palha – ES"
+  description="Conheça a Loft English em São Gabriel da Palha (ES). Inglês para crianças, adolescentes e adultos: Kids, Teens e Adults. Fale com a equipe para saber mais."
+>
+  <Hero />
+
+  <!-- Públicos -->
+  <section class="section audiences" aria-labelledby="aud-title">
+    <div class="container">
+      <div class="audiences__head">
+        <div class="section-head">
+          <p class="eyebrow">Cursos</p>
+          <h2 id="aud-title">Cada fase tem seu jeito de aprender.</h2>
+        </div>
+        <p class="lead">Conheça as opções da Loft English para diferentes momentos da vida e encontre o seu caminho no inglês.</p>
+      </div>
+      <div class="audiences__grid">
+        {courses.map((course, i) => <AudienceCard course={course} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- A escola -->
+  <section class="section section--alt about" id="escola" aria-labelledby="about-title">
+    <div class="container about__grid">
+      <PhotoSlot ratio="1 / 1" class="about__visual" />
+      <div class="about__content">
+        <p class="eyebrow">A escola</p>
+        <h2 id="about-title">Conheça a Loft English.</h2>
+        <p class="about__text">
+          A Loft English é uma escola de inglês em {site.city}, no {site.stateName}, com cursos voltados para crianças,
+          adolescentes e adultos. Seu convite é abrir caminhos para usar o idioma na vida — como diz a assinatura da marca,{' '}
+          <em lang="en">“{site.slogan}”</em>.
+        </p>
+        <dl class="about__facts">
+          <div>
+            <dt><Icon name="map-pin" size={18} /> Onde</dt>
+            <dd>{contact.addressLine ? `${contact.addressLine}, ` : ''}{site.city} – {site.state}</dd>
+          </div>
+          <div>
+            <dt><Icon name="users" size={18} /> Para quem</dt>
+            <dd>Crianças, adolescentes e adultos</dd>
+          </div>
+          <div>
+            <dt><Icon name="instagram" size={18} /> Canal oficial</dt>
+            <dd>
+              <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer">
+                {contact.instagramHandle}<span class="visually-hidden"> (abre em nova aba)</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+        <a class="arrow-link" href={url('/contato/')}>
+          Fale com a escola <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="statement" aria-labelledby="statement-title">
+    <div class="container statement__inner">
+      <p class="statement__label">Como a Loft English se apresenta</p>
+      <h2 id="statement-title" class="statement__quote">
+        Inglês de verdade, <span>para a vida.</span>
+      </h2>
+      <p class="statement__sub">Fale inglês com confiança.</p>
+    </div>
+  </section>
+
+  <VidaNaLoft />
+
+  <!-- Como começar -->
+  <section class="section section--alt steps" aria-labelledby="steps-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Primeiros passos</p>
+        <h2 id="steps-title">Como começar na Loft English.</h2>
+      </div>
+      <ol class="steps__list">
+        {
+          steps.map((step, i) => (
+            <li class="step">
+              <span class="step__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="step__title">{step.title}</h3>
+              <p class="step__text">{step.text}</p>
+              <a
+                class="arrow-link step__link"
+                href={step.link.href}
+                target={step.link.external ? '_blank' : undefined}
+                rel={step.link.external ? 'noopener noreferrer' : undefined}
+              >
+                {step.link.label}
+                <Icon name={step.link.external ? 'arrow-up-right' : 'arrow-right'} size={18} />
+                {step.link.external && <span class="visually-hidden"> (abre em nova aba)</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Dúvidas -->
+  <section class="section faq-section" aria-labelledby="faq-title">
+    <div class="container faq-section__grid">
+      <div class="section-head faq-section__head">
+        <p class="eyebrow">Dúvidas</p>
+        <h2 id="faq-title">Antes de começar.</h2>
+        <p class="lead">Respostas diretas para as perguntas mais comuns. Para detalhes de turmas e valores, fale com a equipe.</p>
+      </div>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <ContactBand />
+</BaseLayout>
+
+<style>
+  /* ---------- Públicos ---------- */
+  .audiences__head {
+    display: grid;
+    gap: var(--sp-4);
+    margin-bottom: clamp(var(--sp-7), 2rem + 2vw, var(--sp-9));
+  }
+
+  .audiences__head .section-head {
+    margin-bottom: 0;
+  }
+
+  .audiences__grid {
+    display: grid;
+    gap: var(--sp-4);
+  }
+
+  @media (min-width: 48rem) {
+    .audiences__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .audiences__head {
+      grid-template-columns: 1.2fr 1fr;
+      align-items: end;
+      gap: var(--sp-9);
+    }
+
+    .audiences__grid {
+      gap: var(--sp-5);
+    }
+  }
+
+  /* ---------- A escola ---------- */
+  .about__grid {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+
+  .about__content {
+    display: grid;
+    gap: var(--sp-5);
+    justify-items: start;
+  }
+
+  .about__content h2 {
+    font-size: var(--fs-2xl);
+    font-weight: 800;
+  }
+
+  .about__text {
+    font-size: var(--fs-md);
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 36rem;
+  }
+
+  .about__text em {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--brand-red);
+  }
+
+  .about__facts {
+    display: grid;
+    width: 100%;
+    margin: var(--sp-2) 0;
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .about__facts > div {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: var(--sp-4);
+    padding-block: var(--sp-4);
+    border-bottom: 1px solid var(--color-line-strong);
+  }
+
+  .about__facts dt {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .about__facts dt :global(svg) {
+    color: var(--brand-red);
+  }
+
+  .about__facts dd {
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .about__facts a {
+    display: inline-block;
+    padding-block: 3px;
+    color: var(--color-ink);
+    font-weight: 600;
+    text-decoration-color: var(--brand-red);
+    text-decoration-thickness: 2px;
+  }
+
+  @media (max-width: 26rem) {
+    .about__facts > div {
+      grid-template-columns: 1fr;
+      gap: var(--sp-1);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .about__grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(3rem, 1rem + 5vw, 7rem);
+    }
+  }
+
+  /* ---------- Manifesto ---------- */
+  .statement {
+    padding-block: clamp(5rem, 3rem + 8vw, 10rem);
+    background: var(--brand-white);
+    text-align: center;
+  }
+
+  .statement__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--sp-5);
+  }
+
+  .statement__label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .statement__quote {
+    font-size: clamp(2.25rem, 1.2rem + 5vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    max-width: 16ch;
+  }
+
+  .statement__quote span {
+    color: var(--brand-red);
+  }
+
+  .statement__sub {
+    position: relative;
+    padding-top: var(--sp-5);
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    color: var(--color-ink-soft);
+  }
+
+  .statement__sub::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3rem;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--brand-red);
+    translate: -50% 0;
+  }
+
+  /* ---------- Como começar ---------- */
+  .steps__list {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-4);
+    counter-reset: step;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    padding: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+    background: var(--color-surface);
+    border-radius: var(--r-xl);
+  }
+
+  .step__num {
+    font-family: var(--font-display);
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--color-surface-alt);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--brand-red);
+    margin-bottom: var(--sp-3);
+  }
+
+  .step__title {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+  }
+
+  .step__text {
+    color: var(--color-muted);
+  }
+
+  .step__link {
+    margin-top: auto;
+    padding-top: var(--sp-3);
+  }
+
+  .step__link :global(svg) {
+    color: var(--brand-red);
+  }
+
+  @media (min-width: 48rem) {
+    .steps__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-section__grid {
+    display: grid;
+    gap: var(--sp-6);
+  }
+
+  .faq-section__head {
+    margin-bottom: 0;
+    align-content: start;
+  }
+
+  @media (min-width: 64rem) {
+    .faq-section__grid {
+      grid-template-columns: 1fr 1.5fr;
+      gap: var(--sp-10);
+    }
+
+    .faq-section__head {
+      position: sticky;
+      top: calc(var(--header-h) + var(--sp-6));
+    }
+  }
+</style>
