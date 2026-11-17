@@ -75,13 +75,14 @@ export const flags = {
  * Passo a passo de liberação: docs/STATUS.md › "Vida na Loft".
  */
 export const mediaRelease = {
+  /** Liberado em 17/11/2026 — confirmação das 3 autorizações pelo responsável do projeto (registro em docs/STATUS.md). */
   vidaNaLoft: {
     /** Estudantes retratados e seus responsáveis legais autorizaram a publicação no site. */
-    studentsAndGuardiansAuthorized: false,
+    studentsAndGuardiansAuthorized: true,
     /** A escola aprovou o uso destas fotografias. */
-    schoolApproved: false,
+    schoolApproved: true,
     /** Pessoas e ambiente foram conferidos com os registros originais (fidelidade da reconstrução). */
-    fidelityChecked: false,
+    fidelityChecked: true,
   },
 };
 

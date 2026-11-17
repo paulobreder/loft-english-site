@@ -92,6 +92,10 @@ Não aproveitados por falta de dados verificáveis ou por regra do projeto: núm
 - O link usa `contact.mapsUrl` ("Como chegar") quando for preenchido; até lá, busca pela cidade no Google Maps.
 - Depois que o endereço for confirmado: `node scripts/gerar-mapa.mjs <lat> <lon> 16` para centralizar na escola e, se desejar, trocar o círculo por um pino.
 
+## Vida na Loft — LIBERADA (v0.4.1, 17/11/2026)
+- O responsável pelo projeto confirmou as três condições: autorização dos estudantes e responsáveis legais, aprovação da escola e conferência de fidelidade. `mediaRelease.vidaNaLoft` está todo `true` e as fotos estão em `src/assets/images/escola/`.
+- **Para retirar do ar** (ex.: revogação de autorização): voltar qualquer item de `mediaRelease.vidaNaLoft` para `false`, remover as fotos de `src/assets/images/escola/`, fazer o commit e rodar `npm run publicar`. Observação: arquivos já enviados ao repositório público continuam no histórico do Git; uma remoção completa exige reescrever esse histórico.
+
 ## Vida na Loft — prévia e liberação (v0.2)
 
 **Seção:** "Muito além da sala de aula." na home, entre o manifesto e "Primeiros passos". Grade editorial assimétrica (sem carrossel): aula coletiva em destaque (3:2) + selfie da turma (retrato) na primeira linha; cartão navy com link para o Instagram + atividade com lanche (4:3) na segunda. Tablet e celular reorganizam/empilham; enquadramentos definidos por foto em `src/data/vida-na-loft/tipos.ts` para não cortar rostos. Fotos sem legendas sobrepostas (descrição apenas no texto alternativo).
