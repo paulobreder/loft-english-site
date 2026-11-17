@@ -61,6 +61,12 @@ Somente fotos **originais e autorizadas** (menores: autorização dos responsáv
 - Modo produção (`SITE_URL` de teste): `index, follow`, canonical absoluto, robots com sitemap, sitemap com `/`, `/cursos/`, `/contato/`; JSON‑LD `EducationalOrganization` só com nome, slogan, URL, logo, Instagram e cidade/UF.
 - Não executado: Lighthouse/PageSpeed oficial, leitor de tela real (VoiceOver/NVDA), Safari/Firefox, teste em aparelho físico, validação no Rich Results Test (requer URL pública).
 
+## Repositório público e prévia no ar (v0.3)
+- Código: https://github.com/paulobreder/loft-english-site (público, **somente arquivos do site**)
+- Prévia: https://paulobreder.github.io/loft-english-site/ (GitHub Pages; `noindex` + robots bloqueado — não é o site oficial)
+- Para atualizar depois de editar: faça o commit e rode `npm run publicar`. O script envia apenas a lista permitida (`src`, `public`, `scripts`, `docs`, configs e workflow); dossiê, referências, fotos pendentes e instruções internas nunca saem desta pasta. O GitHub Actions refaz o site em 1–2 minutos.
+- Links internos usam `url()` (`src/lib/url.ts`) para funcionar no subcaminho do Pages e na raiz de um domínio próprio.
+
 ## Fotos dos cursos Kids, Teens e Adults (v0.3)
 - Imagens publicitárias geradas e aprovadas pelo cliente em 16/11/2026, recebidas pela conversa (não estavam no kit) e copiadas sem alteração para `src/assets/images/cursos/` (`kids.jpg`, `teens.webp` — blusa azul-marinho, `adults.jpg`; a versão anterior de Teens ficou em `teens-anterior-blusa-vermelha.jpg`). São ilustrativas — o texto alternativo e o rodapé informam isso.
 - Ativadas nos slots já existentes (card da home — área de imagem ampliada para 1:1 a pedido do cliente; bloco da página /cursos/ 5:4 no celular e 4:5 no desktop), sem alterar layout. Enquadramento por foto em `src/data/courses.ts` → `image.position` (card / mobile / desktop), preservando rostos, a apostila (Teens) e a caneca (Adults).
