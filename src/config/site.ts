@@ -87,6 +87,24 @@ export const mediaRelease = {
 
 export const isVidaNaLoftReleased = Object.values(mediaRelease.vidaNaLoft).every((ok) => ok === true);
 
+/**
+ * FORMAS DE ESTUDAR (Presencial / Online) — seção com alternância na home.
+ * Só aparece quando ao menos uma modalidade for confirmada (`confirmado: true`).
+ * Descreva apenas o que a escola confirmar (para quais públicos, como funciona).
+ */
+export const modalidades = {
+  presencial: {
+    confirmado: false,
+    /** Ex.: 'Aulas na sede da Loft English, em São Gabriel da Palha, para Kids, Teens e Adults.' */
+    texto: null as string | null,
+  },
+  online: {
+    confirmado: false,
+    /** Ex.: 'Aulas ao vivo pela internet para adultos.' — o dossiê só confirma a MENÇÃO ao online. */
+    texto: null as string | null,
+  },
+};
+
 /** Mensagem inicial sugerida para o WhatsApp (sem dados pessoais na URL). */
 const WHATSAPP_MESSAGE = 'Olá! Vim pelo site da Loft English e gostaria de informações';
 

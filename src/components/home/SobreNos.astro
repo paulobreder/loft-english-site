@@ -1,0 +1,249 @@
+---
+/**
+ * "Sobre nós" — apresentação institucional (âncora #sobre-nos; #escola mantido por compatibilidade).
+ * Pilares com fatos confirmados; história, missão e equipe aparecem só quando preenchidos
+ * em src/data/institucional/sobre.ts.
+ */
+import { Picture } from 'astro:assets';
+import PhotoSlot from '../PhotoSlot.astro';
+import Icon from '../Icon.astro';
+import { site } from '../../config/site';
+import { pilares, historia, missao, equipe } from '../../data/institucional/sobre';
+import { url } from '../../lib/url';
+
+const temExtras = Boolean(historia || missao || equipe.length);
+---
+
+<section class="section section--alt sobre" id="sobre-nos" aria-labelledby="sobre-title">
+  <span id="escola" class="sobre__alias" aria-hidden="true"></span>
+  <div class="container">
+    <div class="sobre__grid">
+      <PhotoSlot ratio="1 / 1" class="sobre__visual" />
+      <div class="sobre__content">
+        <p class="eyebrow">Sobre nós</p>
+        <h2 id="sobre-title">Conheça a Loft English.</h2>
+        <p class="sobre__text">
+          A Loft English é uma escola de inglês em {site.city}, no {site.stateName}, com cursos voltados para crianças,
+          adolescentes e adultos. Seu convite é abrir caminhos para usar o idioma na vida — como diz a assinatura da marca,{' '}
+          <em lang="en">“{site.slogan}”</em>.
+        </p>
+
+        <ul class="pilares">
+          {
+            pilares.map((p) => (
+              <li class="pilar">
+                <span class="pilar__icon">
+                  <Icon name={p.icon} size={22} />
+                </span>
+                <div>
+                  <h3 class="pilar__title" lang={p.titulo === 'Opening the world for you' ? 'en' : undefined}>
+                    {p.titulo}
+                  </h3>
+                  <p class="pilar__text">{p.texto}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a class="arrow-link" href={url('/contato/')}>
+          Fale com a escola <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+    </div>
+
+    {
+      temExtras && (
+        <div class="sobre__extras">
+          {historia && (
+            <div class="sobre__bloco">
+              <h3>Nossa história</h3>
+              <p>{historia}</p>
+            </div>
+          )}
+          {missao && (
+            <div class="sobre__bloco">
+              <h3>Nosso propósito</h3>
+              <p>{missao}</p>
+            </div>
+          )}
+          {equipe.length > 0 && (
+            <div class="sobre__equipe">
+              <h3>Nossa equipe</h3>
+              <ul>
+                {equipe.map((m) => (
+                  <li>
+                    {m.foto && (
+                      <div class="sobre__foto media-fill">
+                        <Picture
+                          src={m.foto}
+                          alt={m.alt ?? m.nome}
+                          formats={['avif', 'webp']}
+                          fallbackFormat="jpg"
+                          widths={[240, 480]}
+                          sizes="240px"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                    <strong>{m.nome}</strong>
+                    <span>{m.cargo}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .sobre {
+    position: relative;
+  }
+
+  .sobre__alias {
+    position: absolute;
+    top: 0;
+  }
+
+  .sobre__grid {
+    display: grid;
+    gap: var(--sp-8);
+    align-items: center;
+  }
+
+  .sobre__content {
+    display: grid;
+    gap: var(--sp-5);
+    justify-items: start;
+  }
+
+  .sobre__content h2 {
+    font-size: var(--fs-2xl);
+    font-weight: 800;
+  }
+
+  .sobre__text {
+    font-size: var(--fs-md);
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 36rem;
+  }
+
+  .sobre__text em {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--brand-red);
+  }
+
+  .pilares {
+    list-style: none;
+    display: grid;
+    width: 100%;
+    margin: var(--sp-2) 0;
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .pilar {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+    padding-block: var(--sp-4);
+    border-bottom: 1px solid var(--color-line-strong);
+  }
+
+  .pilar__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--r-md);
+    background: var(--color-surface);
+    color: var(--brand-red);
+  }
+
+  .pilar__title {
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .pilar__text {
+    margin-top: var(--sp-1);
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+  }
+
+  .sobre__extras {
+    display: grid;
+    gap: var(--sp-5);
+    margin-top: var(--sp-9);
+  }
+
+  .sobre__bloco,
+  .sobre__equipe {
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    border-radius: var(--r-xl);
+    background: var(--color-surface);
+  }
+
+  .sobre__extras h3 {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    margin-bottom: var(--sp-3);
+  }
+
+  .sobre__bloco p {
+    color: var(--color-muted);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  .sobre__equipe ul {
+    list-style: none;
+    display: grid;
+    gap: var(--sp-5);
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  }
+
+  .sobre__equipe li {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .sobre__foto {
+    aspect-ratio: 1;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: var(--sp-2);
+  }
+
+  .sobre__equipe strong {
+    color: var(--color-ink);
+  }
+
+  .sobre__equipe span {
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 64rem) {
+    .sobre__grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(3rem, 1rem + 5vw, 7rem);
+    }
+
+    .sobre__extras:has(.sobre__bloco + .sobre__bloco) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .sobre__equipe {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

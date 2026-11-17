@@ -3,14 +3,17 @@ import { url } from '../lib/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import VidaNaLoft from '../components/home/VidaNaLoft.astro';
+import SobreNos from '../components/home/SobreNos.astro';
+import PorQueIngles from '../components/home/PorQueIngles.astro';
+import FormasDeEstudar from '../components/home/FormasDeEstudar.astro';
+import ProvaSocial from '../components/home/ProvaSocial.astro';
 import AudienceCard from '../components/AudienceCard.astro';
-import PhotoSlot from '../components/PhotoSlot.astro';
 import Faq from '../components/Faq.astro';
 import ContactBand from '../components/ContactBand.astro';
 import Icon from '../components/Icon.astro';
 import { courses } from '../data/courses';
 import { faq } from '../data/faq';
-import { site, contact, primaryContact } from '../config/site';
+import { primaryContact } from '../config/site';
 
 const cta = primaryContact();
 
@@ -55,42 +58,7 @@ const steps = [
     </div>
   </section>
 
-  <!-- A escola -->
-  <section class="section section--alt about" id="escola" aria-labelledby="about-title">
-    <div class="container about__grid">
-      <PhotoSlot ratio="1 / 1" class="about__visual" />
-      <div class="about__content">
-        <p class="eyebrow">A escola</p>
-        <h2 id="about-title">Conheça a Loft English.</h2>
-        <p class="about__text">
-          A Loft English é uma escola de inglês em {site.city}, no {site.stateName}, com cursos voltados para crianças,
-          adolescentes e adultos. Seu convite é abrir caminhos para usar o idioma na vida — como diz a assinatura da marca,{' '}
-          <em lang="en">“{site.slogan}”</em>.
-        </p>
-        <dl class="about__facts">
-          <div>
-            <dt><Icon name="map-pin" size={18} /> Onde</dt>
-            <dd>{contact.addressLine ? `${contact.addressLine}, ` : ''}{site.city} – {site.state}</dd>
-          </div>
-          <div>
-            <dt><Icon name="users" size={18} /> Para quem</dt>
-            <dd>Crianças, adolescentes e adultos</dd>
-          </div>
-          <div>
-            <dt><Icon name="instagram" size={18} /> Canal oficial</dt>
-            <dd>
-              <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer">
-                {contact.instagramHandle}<span class="visually-hidden"> (abre em nova aba)</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-        <a class="arrow-link" href={url('/contato/')}>
-          Fale com a escola <Icon name="arrow-right" size={18} />
-        </a>
-      </div>
-    </div>
-  </section>
+  <SobreNos />
 
   <!-- Manifesto -->
   <section class="statement" aria-labelledby="statement-title">
@@ -103,7 +71,13 @@ const steps = [
     </div>
   </section>
 
+  <PorQueIngles />
+
   <VidaNaLoft />
+
+  <FormasDeEstudar />
+
+  <ProvaSocial />
 
   <!-- Como começar -->
   <section class="section section--alt steps" aria-labelledby="steps-title">
@@ -185,95 +159,6 @@ const steps = [
 
     .audiences__grid {
       gap: var(--sp-5);
-    }
-  }
-
-  /* ---------- A escola ---------- */
-  .about__grid {
-    display: grid;
-    gap: var(--sp-8);
-    align-items: center;
-  }
-
-  .about__content {
-    display: grid;
-    gap: var(--sp-5);
-    justify-items: start;
-  }
-
-  .about__content h2 {
-    font-size: var(--fs-2xl);
-    font-weight: 800;
-  }
-
-  .about__text {
-    font-size: var(--fs-md);
-    line-height: 1.7;
-    color: var(--color-muted);
-    max-width: 36rem;
-  }
-
-  .about__text em {
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--brand-red);
-  }
-
-  .about__facts {
-    display: grid;
-    width: 100%;
-    margin: var(--sp-2) 0;
-    border-top: 1px solid var(--color-line-strong);
-  }
-
-  .about__facts > div {
-    display: grid;
-    grid-template-columns: 9.5rem 1fr;
-    gap: var(--sp-4);
-    padding-block: var(--sp-4);
-    border-bottom: 1px solid var(--color-line-strong);
-  }
-
-  .about__facts dt {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-ink);
-  }
-
-  .about__facts dt :global(svg) {
-    color: var(--brand-red);
-  }
-
-  .about__facts dd {
-    margin: 0;
-    color: var(--color-text);
-  }
-
-  .about__facts a {
-    display: inline-block;
-    padding-block: 3px;
-    color: var(--color-ink);
-    font-weight: 600;
-    text-decoration-color: var(--brand-red);
-    text-decoration-thickness: 2px;
-  }
-
-  @media (max-width: 26rem) {
-    .about__facts > div {
-      grid-template-columns: 1fr;
-      gap: var(--sp-1);
-    }
-  }
-
-  @media (min-width: 64rem) {
-    .about__grid {
-      grid-template-columns: 1fr 1.1fr;
-      gap: clamp(3rem, 1rem + 5vw, 7rem);
     }
   }
 

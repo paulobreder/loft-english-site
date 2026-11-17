@@ -61,6 +61,20 @@ Somente fotos **originais e autorizadas** (menores: autorização dos responsáv
 - Modo produção (`SITE_URL` de teste): `index, follow`, canonical absoluto, robots com sitemap, sitemap com `/`, `/cursos/`, `/contato/`; JSON‑LD `EducationalOrganization` só com nome, slogan, URL, logo, Instagram e cidade/UF.
 - Não executado: Lighthouse/PageSpeed oficial, leitor de tela real (VoiceOver/NVDA), Safari/Firefox, teste em aparelho físico, validação no Rich Results Test (requer URL pública).
 
+## Novos recursos inspirados em benchmarking (v0.4)
+Análise da landing page da Cultura Inglesa (17/11/2026). Aproveitados apenas **padrões de UX**, sem copiar textos, marca nem números.
+
+| Recurso | Onde | Estado |
+|---|---|---|
+| **Sobre nós** (pilares com fatos confirmados; menu "Sobre nós" → `#sobre-nos`) | Home | Ativo |
+| História, missão e equipe | `src/data/institucional/sobre.ts` | Oculto até preencher (pendências I03/I04) |
+| **Por que aprender inglês?** (6 benefícios gerais do idioma) | Home | Ativo |
+| **Barra de contato fixa** no celular (some no topo, na faixa de contato e no rodapé; não aparece no desktop nem em /contato/) | Todas as páginas | Ativo |
+| **Formas de estudar** (abas Presencial/Online) | `modalidades` em `src/config/site.ts` | Oculto até `confirmado: true` |
+| **Depoimentos** e **Reconhecimentos** (só itens com `autorizado: true`) | `src/data/institucional/prova-social.ts` | Ocultos até haver material real |
+
+Não aproveitados por falta de dados verificáveis ou por regra do projeto: números/estatísticas, depoimentos e prêmios genéricos, promoções, teste de nível e formulário.
+
 ## Repositório público e prévia no ar (v0.3)
 - Código: https://github.com/paulobreder/loft-english-site (público, **somente arquivos do site**)
 - Prévia: https://paulobreder.github.io/loft-english-site/ (GitHub Pages; `noindex` + robots bloqueado — não é o site oficial)
